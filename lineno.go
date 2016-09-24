@@ -1,7 +1,6 @@
 package logrushooks
 
 import (
-	"fmt"
 	"path"
 	"runtime"
 	"strings"
@@ -20,7 +19,6 @@ func (hook LineNoHook) Fire(entry *logrus.Entry) error {
 	for {
 		if pc, file, line, ok := runtime.Caller(i); ok {
 			funcName := runtime.FuncForPC(pc).Name()
-			fmt.Println(funcName, i)
 			if !strings.Contains(funcName, "github.com/Sirupsen/logrus") && !strings.Contains(funcName, "github.com/xtaci/logrushooks") {
 				entry.Data["file"] = path.Base(file)
 				entry.Data["func"] = path.Base(funcName)
